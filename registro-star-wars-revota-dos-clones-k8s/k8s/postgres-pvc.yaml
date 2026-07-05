@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: postgres-pvc
-  namespace: registro-atividades
+  namespace: registro-atividades-2
 spec:
   accessModes:
     - ReadWriteOnce

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: registro-atividades-api
-  namespace: registro-atividades
+  namespace: registro-atividades-2
 spec:
   replicas: 2
   selector:
