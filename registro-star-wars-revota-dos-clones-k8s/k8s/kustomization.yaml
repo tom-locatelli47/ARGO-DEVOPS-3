@@ -2,12 +2,14 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: registro-atividades-2
 resources:
-  - namespace.yaml
-  - postgres-pvc.yaml
-  - postgres-deployment.yaml
-  - postgres-service.yaml
-  - api-deployment.yaml
-  - api-service.yaml
+- namespace.yaml
+- postgres-pvc.yaml
+- postgres-deployment.yaml
+- postgres-service.yaml
+- api-deployment.yaml
+- api-service.yaml
 images:
-  - name: tomaslocatelli/registro-star-wars-revolta-dos-clones-devops
-    newTag: latest
+- name: tom-locatelli47/registro-star-wars-revolta-dos-clones-devops
+  newTag: 664219bf9b2af74f0045f75e689fc66c01b1dbde
+- name: tomaslocatelli/registro-star-wars-revolta-dos-clones-devops
+  newTag: latest
