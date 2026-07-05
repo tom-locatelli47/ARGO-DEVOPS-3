@@ -3,7 +3,6 @@ kind: Kustomization
 namespace: registro-atividades
 resources:
   - namespace.yaml
-  - secret.yaml.example
   - postgres-pvc.yaml
   - postgres-deployment.yaml
   - postgres-service.yaml
