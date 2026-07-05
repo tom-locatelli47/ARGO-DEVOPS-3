@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: registro-atividades-api-service
+  namespace: registro-atividades
+spec:
+  selector:
+    app: registro-atividades-api
+  ports:
+    - protocol: TCP
+      port: 8001
+      targetPort: 8001
+  type: ClusterIP

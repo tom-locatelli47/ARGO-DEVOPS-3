@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: registro-atividades-api
+  namespace: registro-atividades
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: registro-atividades-api
+  template:
+    metadata:
+      labels:
+        app: registro-atividades-api
+    spec:
+      containers:
+        - name: api
+          image: tomaslocatelli/registro-star-wars-revolta-dos-clones-devops:latest
+          ports:
+            - containerPort: 8001
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: DATABASE_URL
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: SECRET_KEY

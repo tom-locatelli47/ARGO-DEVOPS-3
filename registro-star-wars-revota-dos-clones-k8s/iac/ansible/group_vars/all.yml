@@ -1,0 +1,3 @@
+---
+cluster_name: registro-star-wars-revolta-dos-clones
+kubernetes_version: "1.30"

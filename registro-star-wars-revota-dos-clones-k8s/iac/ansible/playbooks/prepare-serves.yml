@@ -1,0 +1,8 @@
+---
+- name: Prepare servers for Kubernetes
+  hosts: all
+  become: true
+  tasks:
+    - name: Placeholder task
+      ansible.builtin.debug:
+        msg: "Preparação inicial do ambiente"
