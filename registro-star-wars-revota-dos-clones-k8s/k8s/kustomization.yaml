@@ -12,7 +12,7 @@ resources:
 - frontend-service.yaml
 images:
 - name: tom-locatelli47/registro-star-wars-revolta-dos-clones-devops
-  newTag: fd15b7cfe62c827eb5fec086afa770d88efbbdf7
+  newTag: ca8d5a170d1abf7753aab5ecc20aba576ec004d6
 - name: tomaslocatelli/registro-star-wars-backend
   newTag: latest
 - name: tomaslocatelli/registro-star-wars-frontend
