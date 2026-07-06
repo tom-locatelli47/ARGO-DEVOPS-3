@@ -1,3 +1,5 @@
+Esse Readme foi gerado com IA
+
 # 🛰️ ARGO-DEVOPS-3 — GitOps
 
 Repositório **GitOps** do projeto [`registro-star-wars-revolta-dos-clones-devops`](https://github.com/tom-locatelli47/registro-star-wars-revolta-dos-clones-devops), desenvolvido para a disciplina **Fundamentos de DevOps**.
