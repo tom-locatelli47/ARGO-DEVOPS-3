@@ -1,3 +1,11 @@
 ---
-cluster_name: registro-star-wars-revolta-dos-clones
-kubernetes_version: "1.30"
+common_packages:
+   - curl
+   - vim
+   - htop
+   - net-tools
+   - ca-certificates
+   - apt-transport-https
+
+admin_user: devops
+admin_pubkey: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHlENz13ZXgG45J0CP47RSNNYNCUQ3cQgXobJBcXyWKz devops-key"

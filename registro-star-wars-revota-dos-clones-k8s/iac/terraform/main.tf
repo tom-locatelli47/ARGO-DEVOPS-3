@@ -26,10 +26,10 @@ data "aws_subnets" "default" {
 
 locals {
   nodes = {
-    control-plane = { role = "control-plane" }
-    worker-1      = { role = "worker" }
-    worker-2      = { role = "worker" }
-    worker-3      = { role = "worker" }
+    control-plane = { role = "control-plane", size = "t2.micro" }
+    worker-1      = { role = "worker",        size = "t2.micro" }
+    worker-2      = { role = "worker",        size = "t2.micro" }
+    worker-3      = { role = "worker",        size = "t2.micro" }
   }
 }
 
@@ -69,9 +69,9 @@ resource "aws_security_group" "nodes_sg" {
 resource "aws_instance" "nodes" {
   for_each = local.nodes
 
-  ami                         = var.ami_id
-  instance_type               = var.instance_type
-  key_name                    = var.key_name
+  ami           = var.ami_id
+  instance_type = each.value.size # <--- Puxa o "size" de cada uma das chaves acima
+  key_name      = var.key_name
   subnet_id                   = element(data.aws_subnets.default.ids, index(keys(local.nodes), each.key))
   vpc_security_group_ids      = [aws_security_group.nodes_sg.id]
   associate_public_ip_address = true
