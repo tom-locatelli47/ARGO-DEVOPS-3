@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: registro-atividades-frontend-service
+  namespace: registro-atividades-2
+spec:
+  selector:
+    app: registro-atividades-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP

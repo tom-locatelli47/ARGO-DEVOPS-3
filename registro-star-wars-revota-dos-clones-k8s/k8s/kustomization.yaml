@@ -8,8 +8,10 @@ resources:
 - postgres-service.yaml
 - api-deployment.yaml
 - api-service.yaml
+- frontend-deployment.yaml
+- frontend-service.yaml
 images:
-- name: tom-locatelli47/registro-star-wars-revolta-dos-clones-devops
-  newTag: b505533249efcb6663275b791dd28e67410a3dec
-- name: tomaslocatelli/registro-star-wars-revolta-dos-clones-devops
+- name: tomaslocatelli/registro-star-wars-backend
+  newTag: latest
+- name: tomaslocatelli/registro-star-wars-frontend
   newTag: latest

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: registro-atividades-frontend
+  namespace: registro-atividades-2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: registro-atividades-frontend
+  template:
+    metadata:
+      labels:
+        app: registro-atividades-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: tomaslocatelli/registro-star-wars-frontend:latest
+          ports:
+            - containerPort: 80

@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: tomaslocatelli/registro-star-wars-revolta-dos-clones-devops:latest
+          image: tomaslocatelli/registro-star-wars-backend:latest
           ports:
             - containerPort: 8001
           env:

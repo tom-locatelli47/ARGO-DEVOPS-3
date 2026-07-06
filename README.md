@@ -28,11 +28,20 @@ registro-star-wars-revota-dos-clones-k8s/
     postgres-pvc.yaml
     postgres-deployment.yaml
     postgres-service.yaml
-    api-deployment.yaml
-    api-service.yaml
+    api-deployment.yaml            # Deployment do backend
+    api-service.yaml               # Service do backend
+    frontend-deployment.yaml       # Deployment do frontend
+    frontend-service.yaml          # Service do frontend
     argocd-repo-server-network-policy.yaml
-    kustomization.yaml            # o CI/CD atualiza a tag da imagem aqui
+    kustomization.yaml            # o CI/CD atualiza as tags das duas imagens aqui
 ```
+
+Backend e frontend são componentes **independentes**: cada um tem sua própria imagem Docker, seu próprio `Deployment` e seu próprio `Service` ClusterIP.
+
+| Componente | Imagem | Deployment | Service |
+| --- | --- | --- | --- |
+| Backend (API) | `tomaslocatelli/registro-star-wars-backend` | `registro-atividades-api` | `registro-atividades-api-service` (porta 8001) |
+| Frontend | `tomaslocatelli/registro-star-wars-frontend` | `registro-atividades-frontend` | `registro-atividades-frontend-service` (porta 80) |
 
 ---
 
@@ -117,22 +126,26 @@ Ou pela UI do ArgoCD, informando:
 
 ## 🌐 Acesso à Aplicação
 
-Os manifests deste repositório expõem a API (`registro-atividades-api-service`) e o PostgreSQL como **ClusterIP** internos ao cluster. Para acessar a API a partir da sua máquina durante testes:
+Os manifests deste repositório expõem a API (`registro-atividades-api-service`), o frontend (`registro-atividades-frontend-service`) e o PostgreSQL como **ClusterIP** internos ao cluster. Para acessar a partir da sua máquina durante testes:
 
 ```bash
+# API
 kubectl port-forward -n registro-atividades-2 svc/registro-atividades-api-service 8001:8001
+
+# Frontend
+kubectl port-forward -n registro-atividades-2 svc/registro-atividades-frontend-service 8080:80
 ```
 
-O frontend (`frontend/index.html`, no repositório principal) consome essa API a partir da URL configurada.
+O frontend consome a API a partir da URL configurada no campo "API base" da própria página (por padrão `http://localhost:8001`).
 
 ---
 
 ## 🔁 Fluxo CD Ponta-a-Ponta
 
-1. Push na `main` do repositório principal → GitHub Actions roda os testes.
-2. Workflow builda e publica a imagem `tomaslocatelli/registro-star-wars-revolta-dos-clones-devops:<sha>` no Docker Hub.
-3. Workflow faz commit **neste** repositório, atualizando `newTag` em `k8s/kustomization.yaml` via Kustomize.
-4. **ArgoCD** detecta o commit e sincroniza automaticamente o cluster K3s.
+1. Push na `main` do repositório principal → GitHub Actions roda os testes do backend.
+2. Dois jobs independentes buildam e publicam `tomaslocatelli/registro-star-wars-backend:<sha>` e `tomaslocatelli/registro-star-wars-frontend:<sha>` no Docker Hub.
+3. Workflow faz commit **neste** repositório, atualizando o `newTag` de **cada imagem** em `k8s/kustomization.yaml` via Kustomize.
+4. **ArgoCD** detecta o commit e sincroniza automaticamente o cluster K3s — backend e frontend são implantados de forma independente.
 
 ```
 git push (app) → GitHub Actions → Docker Hub → bump de tag aqui (GitOps) → ArgoCD → K3s
