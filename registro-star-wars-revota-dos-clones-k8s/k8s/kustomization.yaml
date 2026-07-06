@@ -10,6 +10,6 @@ resources:
 - api-service.yaml
 images:
 - name: tom-locatelli47/registro-star-wars-revolta-dos-clones-devops
-  newTag: bb18837cfbbcbc06aab02999ca63bcd4bd7ce2f9
+  newTag: b505533249efcb6663275b791dd28e67410a3dec
 - name: tomaslocatelli/registro-star-wars-revolta-dos-clones-devops
   newTag: latest
